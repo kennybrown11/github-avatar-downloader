@@ -17,6 +17,9 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 
 function getName(myArgs) {
+  if (getName === undefined){
+    console.log("Error: Incorrect Login ")
+  } else {
   for (var i = 0; i < myArgs.length; i++) {
     var currentString = myArgs[i]
     var getName = "";
@@ -24,7 +27,7 @@ function getName(myArgs) {
     for (var x = currentString.length - 1; x >= 0; x--) {
       getName += currentString[x];
     }
-
+  }
     getRepoContributors(getName)
   }
 }
