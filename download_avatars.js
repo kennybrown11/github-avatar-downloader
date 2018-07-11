@@ -15,24 +15,6 @@ function getRepoContributors(repoOwner, repoName, cb) {
     }) 
 };
 
-
-function getName(myArgs) {
-  if (getName === undefined){
-    console.log("Error: Incorrect Login ")
-  
-  } else {
-  for (var i = 0; i < myArgs.length; i++) {
-    var currentString = myArgs[i]
-    var getName = "";
-
-    for (var x = 0; x < currentString.length; x++) {
-      getName += currentString[x];
-    }
-  }
-    getRepoContributors(getName)
-  }
-}
-
 function downloadImageByURL(url, filePath) {
   request.get(url)
   .on('error', function (err) {  
@@ -41,12 +23,11 @@ function downloadImageByURL(url, filePath) {
   .pipe(fs.createWriteStream(filePath)); 
 }
 
+let arrNames = process.argv.slice(2);
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(arrNames[0], arrNames[1], function(err, result) {
   result.forEach(function(element) {
     downloadImageByURL(element.avatar_url, "avatars/" + element.login + ".jpeg")
   })
   
 });
-
-getName(process.argv.slice(2));
